@@ -1,3 +1,5 @@
+The website for this repo can be found [here](https://mqwilber.github.io/2017-04-21-ucsb/)
+
 # workshop-template
 
 This repository is [Software Carpentry][swc-site] and [Data Carpentry][dc-site]'s
