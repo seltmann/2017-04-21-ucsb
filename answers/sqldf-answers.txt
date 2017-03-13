@@ -1,0 +1,28 @@
+Exercise 1:
+
+head(mammals)
+sqldf("select distinct species, litter_size from mammals where litter_size<'1'")
+sqldf()
+
+
+Exercise 2:
+newFile <- sqldf("select distinct upper(taxonOrder) from mammalsEdited")
+head(newFile)
+
+
+Exercise 3:
+
+sqlJoinMammalsCount <- sqldf("select * from sqlJoinMammals join numberSpecies on numberSpecies.taxonOrder=sqlJoinMammals.taxonOrder")
+
+#can also accomplish the same thing through a natural joins
+
+sqlJoinMammalsCount <- sqldf("select * from sqlJoinMammals natural join numberSpecies")
+head(sqlJoinMammalsCount)
+
+
+Exercise 4:
+
+Way #1:
+sql1 <- "update updateValues set mass=round(mass)"
+sql2 <- "select * from updateValues"
+sqldf(c(sql1, sql2))
