@@ -15,16 +15,16 @@ keypoints:
 - "FIXME"
 ---
 
-*Prepared by [Umihiko Hoshijima](mailto:umihiko.hoshijima@lifesci.ucsb.edu), Inspiration/Material from Sean Anderson in [Reshape2](http://seananderson.ca/2013/10/19/reshape.html) and [plyr](http://seananderson.ca/2014/09/13/dplyr-intro.html)*
+*Prepared by [Umihiko Hoshijima](mailto:umihiko.hoshijima@lifesci.ucsb.edu), Inspiration/Material from Sean Anderson in [Reshape2](http://seananderson.ca/2013/10/19/reshape.html) and [dplyr](http://seananderson.ca/2014/09/13/dplyr-intro.html)*
 
 Goals
 -----
 
-The goal of this module is to give a brief introduction to the world of quick data analysis using `plyr`, to serve as reference when working with your own datasets. 
+The goal of this module is to give a brief introduction to the world of quick data analysis using `dplyr`, to serve as reference when working with your own datasets. 
 
 By the end of this lesson, you should be able to: 
 
-1. use `dPlyr` examples to understand the principles behind the "Split-Apply-Recombine" method of data analysis
+1. use `dplyr` examples to understand the principles behind this method of data analysis
 2. Streamline and increase legibility of code by using `pipes`
 
 Summarizing and Operating: the dPlyr world
@@ -32,17 +32,10 @@ Summarizing and Operating: the dPlyr world
 
 For this section, let's load the file [mammal_stats.csv](https://raw.githubusercontent.com/mqwilber/2016-04-14-ucsb/gh-pages/lessons/plyr_reshape/mammal_stats.csv). This is a subset of a *["species-level database of extant and recently extinct mammals](http://esapubs.org/archive/ecol/E090/184/)*. 
 
-So far we've successfully loaded data by navigating to the directory and typing the name into `read.csv()`. But what if we're writing the script for another computer, or for a collaborator that may have the data in a different location? We can instead have the script pop up a window to select their data from. 
+Let's download this file from the git repository, and load it as: 
+    mammals <- read.csv('mammal_stats.csv')
 
-    # Instead of this: 
-    # mammals <- read.csv("mammal_stats.csv")
-    # Use this: 
-    mammals <- read.csv(file.choose())
-    dim(mammals)
-    
-The function `file.choose()` is what pulls up the window and lets you select a file. It then returns that file name and directory, which gets used by `read.csv()`. 
-    
-Alright, back to mammals! You'll notice that as we work on larger datasets, viewing and visualizing the entire dataset can become more and more difficult. Similarly, analyzing the datasets becomes more complex. Is there a good way to be able to summarize datasets succinctly, and to be able to analyze subsets of a dataset automatically? 
+You'll notice that as we work on larger datasets, viewing and visualizing the entire dataset can become more and more difficult. Similarly, analyzing the datasets becomes more complex. Is there a good way to be able to summarize datasets succinctly, and to be able to analyze subsets of a dataset automatically? 
 
 The answer lies in a handy library called `dplyr`. `dplyr` will allow us to perform more complex operations on datasets in intuitive ways.
 
