@@ -184,7 +184,7 @@ Remove white space
     head(taxonString)
 
 ***
-Counting using SQLite by Groups and then making quick and simple barplots
+Counting using SQLite by Groups and then making quick and simple bar plots
 
     numberSpecies <- sqldf("select count(species) as cnt,taxonOrder from mammalsEdited group by taxonOrder order by cnt desc")
     
