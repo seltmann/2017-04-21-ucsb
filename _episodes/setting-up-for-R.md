@@ -12,7 +12,9 @@ A.  Make a folder called `workshop` on your `Desktop`
 
 B. Download the data files that we will be using for the R portion of the workshop by clicking [here](http://swcarpentry.github.io/r-novice-inflammation/files/r-novice-inflammation-data.zip).  
 
-C. Unzip these files and move the resulting `data` folder into your `workshop` folder.
+C. Unzip these files and move the resulting `data` folder into your `workshop` folder. If the `data` folder is in your `Downloads` directory you can use
+
+    mv ~/Downloads/data ~/Desktop/workshop
 
 D. `cd` into your `workshop` folder (if you are not already there) and initialize it as a Git repo
 
