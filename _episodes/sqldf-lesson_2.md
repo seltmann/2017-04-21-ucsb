@@ -66,7 +66,7 @@ Getting started where we left off...
 
 
 ***
-Insert a single record
+**Insert** a single record
 
  db <- dbConnect(SQLite(), dbname="Mammaldb.sqlite")
  
@@ -101,29 +101,29 @@ Insert a single record
 ***
 **Write** query from database to data frame
 
-results <- dbGetQuery(db, "SELECT species, avg(litter_size) FROM Mammalcsv GROUP BY species;")
+	results <- dbGetQuery(db, "SELECT species, avg(litter_size) FROM Mammalcsv GROUP BY species;")
 
-head(results)
+	head(results)
 
 ***
 **SQL** in R functions
 
-library(RSQLite)
+	library(RSQLite)
 
-db <- dbConnect(SQLite(), "Mammaldb.sqlite")
+	db <- dbConnect(SQLite(), "Mammaldb.sqlite")
 
-getName <- function(orderName) {
-  query <- paste0("SELECT `order` || '-' || species FROM Mammalcsv WHERE `order` =='",orderName, "';")
-  return(dbGetQuery(db, query))
-}
+	getName <- function(orderName) {
+  		query <- paste0("SELECT `order` || '-' || species FROM Mammalcsv WHERE 			`order` =='",orderName, "';")
+  		return(dbGetQuery(db, query))
+	}
 
-print(paste("species:", getName('Tubulidentata')))
+	print(paste("species:", getName('Tubulidentata')))
 
-dbDisconnect(connection)
+	dbDisconnect(connection)
 
 
 ***
-Disconnect at the end. Important if you have multiple transactions happening in an R script
+**Disconnect** at the end. Important if you have multiple transactions happening in an R script
 
     dbDisconnect(db)
 
