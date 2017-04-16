@@ -1,12 +1,11 @@
 ---
 title: SQLite with dataframes
-teaching: FIX
+teaching: Katja Seltmann
 exercises: FIX
 questions:
 - "FIXME"
 objectives:
-- "FIXME"
-- "FIXME"
+- Introduction to relational databases and SQL syntax using SQLlite database manager directly on data frames
 keypoints:
 - "FIXME"
 keypoints:
@@ -22,10 +21,6 @@ keypoints:
 - [answers to exercises](../answers/sqldf-answers.txt)
 - [reference](http://swcarpentry.github.io/sql-novice-survey/reference.html)
 - [SQLite function reference](https://www.sqlite.org/lang_corefunc.html)
-
-# Goal of this lesson
-- Introduction to relational databases and SQL syntax using SQLlite database manager directly on data frames
-
 
 # What is a relational database?
 
@@ -86,7 +81,7 @@ Clear that working memory...
 ***
 Check your working directory, make a new folder called sqldf
 
-    setwd("~/Desktop/software-carpentry-2016/data-files/sqldf")
+    setwd("~/Desktop/workshop")
     
     getwd()
 
