@@ -21,8 +21,8 @@ keypoints:
 
 **Supplementary Material**: 
 
-- [answers to exercises]()
-- [reference]()
+- [answers to exercises](https://mqwilber.github.io/2017-04-21-ucsb/sqldf-answers.txt)
+- [reference](https://swcarpentry.github.io/sql-novice-survey/reference/)
 - [SQLite function reference](https://www.sqlite.org/lang_corefunc.html)
 
 # What is a database?
@@ -33,7 +33,7 @@ When we are using a spreadsheet, we put formulas into cells to calculate new val
 
 # What is a relational database?
 
-A database that relates one value in one table to a value in another table.
+A collection of data organized into tables and those tables contain values that relate one table to another.
 
 # What is SQL?
 
@@ -303,5 +303,5 @@ Delete values
 
 We covered basic syntax of sql using sqlLite syntax on data frames without actually creating a database. We did not cover creating a relational database or executing commands in conjunction with a database. 
 
-#[Sandy Muspratt's R Blog](http://sandymuspratt.blogspot.com/2012/11/r-and-sqlite-part-1.html)
+#[SQL part II](https://mqwilber.github.io/2017-04-21-ucsb/sqldf-lesson_2)
 

@@ -1,18 +1,29 @@
 ---
-title: "Learning SQLite databases"
-output: html_document
-root: ../..
-layout: lesson
+title: Creating SQLlite databases
+teaching: 90
+exercises: 5
+questions:
+- What are databases and how do I use them.
+objectives:
+- Understand what a database is and when is it useful
+- Understand SQL syntax using SQLlite database manager directly on data frames
+- Understand how to start building a relational database
+keypoints:
+
+keypoints:
+- SQL is powerful for manipulating dataframes
+- "FIXME"
+- "FIXME"
+
 ---
-  
-  *by Katja Seltmann* with excerpts from Software Carpentry SQLite lesson.
+
+*by Katja Seltmann* with excerpts from Software Carpentry SQLite lesson.
 
 **Supplementary Material**: 
-  
-- [answers to exercises](sqldf-answers.txt)
-- [reference](http://swcarpentry.github.io/sql-novice-survey/reference.html)
+
+- [answers to exercises](https://mqwilber.github.io/2017-04-21-ucsb/sqldf-answers.txt)
+- [reference](https://swcarpentry.github.io/sql-novice-survey/reference/)
 - [SQLite function reference](https://www.sqlite.org/lang_corefunc.html)
-- [Sandy Muspratts R Blog](http://sandymuspratt.blogspot.com/2012/11/r-and-sqlite-part-1.html)
 
 #`Goal of this lesson`
 - Introduction to creating and storing data using SQLite, data Joins, Updates and Delete
