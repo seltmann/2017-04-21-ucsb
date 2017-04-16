@@ -1,5 +1,5 @@
 ---
-title: SQLite with dataframes
+title: SQLite with  data frames
 teaching: 90
 exercises: 5
 questions:
@@ -11,8 +11,8 @@ objectives:
 keypoints:
 
 keypoints:
-- SQL is powerful for manipulating dataframes
-- You can select, delete, insert values in dataframes using SQL
+- SQL is powerful tool for manipulating  data frames
+- You can select, delete, insert values in  data frames using SQL
 - There is more to learn!
 
 ---
@@ -132,7 +132,7 @@ SQLite gives you more ways with Select. Select statements using SQLite * indicat
 
 > **TIP**: The word ***order*** is a column name, but it is also a command reserved in SQL. Put column names in `` to avoid confusion.
 
-**Select** using filters, limits and ordering
+**Select** using filters
 
     sqldf("select * from mammals where `order`='Carnivora'")
     
@@ -231,7 +231,7 @@ We have come far! Now, lets figure out how to do more complex actions in SQLite 
 
 
 ***
-#Joining data frames
+# Joining data frames
 
 Let's make the merge in a way we can select values from 2 different data frames and put them together in a new data frame
 
@@ -245,7 +245,7 @@ Let's make the merge in a way we can select values from 2 different data frames 
 
 	head(sqlJoinMammalsCount)
 
-***TIP***: Notice species is now in the dataframe twice! Why?
+***TIP***: Notice species is now in the  data frame twice! Why?
     
     sqlJoinMammalsCount <- sqldf("select mammals.*,mammalCounts.orderTotal from mammals join mammalCounts on mammals.species=mammalCounts.species")
     head(sqlJoinMammalsCount)
@@ -255,7 +255,7 @@ Let's make the merge in a way we can select values from 2 different data frames 
 # Update and Delete values from a data frame
 
 ***
-Update a data frame by merging and overwriting the first dataframe
+Update a data frame by merging and overwriting the first  data frame
 
     sql1 <- "update sqlJoinMammalsCount set `order`='Primates' where species='Dromiciops gliroides'"
     
@@ -274,6 +274,7 @@ Delete values
     
 ***
 Insert a value
+
     sqlJoinMammalsCount <- sqldf(c("insert into sqlJoinMammalsCount values (1,'Primates','New primate', 55.00,'',134,2,4)","select * from sqlJoinMammalsCount"))
 
     head(sqlJoinMammalsCount)

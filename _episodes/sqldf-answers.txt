@@ -2,7 +2,6 @@ Exercise 1:
 
 head(mammals)
 sqldf("select distinct species, litter_size from mammals where litter_size<'1'")
-sqldf()
 
 
 Exercise 2:
