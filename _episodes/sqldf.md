@@ -295,5 +295,5 @@ Insert a value
 
 We covered basic syntax of sql using SQLite syntax on data frames without actually creating a database. We did not cover creating a relational database or executing commands in conjunction with a database. 
 
-#[SQL part II](https://mqwilber.github.io/2017-04-21-ucsb/sqldf-lesson_2)
+# [SQL part II](https://mqwilber.github.io/2017-04-21-ucsb/sqldf-lesson_2)
 
