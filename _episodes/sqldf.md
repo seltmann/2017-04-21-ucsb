@@ -1,25 +1,22 @@
 ---
 title: SQLite with dataframes
-teaching: Katja Seltmann
-exercises: FIX
+teaching: 90
+exercises: 5
 questions:
-- "FIXME"
+- What are databases and how do I use them.
 objectives:
-- Introduction to relational databases and SQL syntax using SQLlite database manager directly on data frames
-keypoints:
-- "FIXME"
-keypoints:
-- "FIXME"
-- "FIXME"
-- "FIXME"
+- Understand what a database is and when is it useful
+- Understand SQL syntax using SQLlite database manager directly on data frames
+- Understand how to start building a relational database
+
 ---
 
 *by Katja Seltmann* with excerpts from Software Carpentry SQLite lesson.
 
 **Supplementary Material**: 
 
-- [answers to exercises](../answers/sqldf-answers.txt)
-- [reference](http://swcarpentry.github.io/sql-novice-survey/reference.html)
+- [answers to exercises]()
+- [reference]()
 - [SQLite function reference](https://www.sqlite.org/lang_corefunc.html)
 
 # What is a relational database?
