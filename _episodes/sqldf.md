@@ -12,8 +12,8 @@ keypoints:
 
 keypoints:
 - SQL is powerful for manipulating dataframes
-- "FIXME"
-- "FIXME"
+- You can select, delete, insert values in dataframes using SQL
+- There is more to learn!
 
 ---
 
@@ -60,14 +60,6 @@ We are going to learn the basics of SQL using ***SQLite*** using data frames. Yo
 <img src="http://thecodebug.com/wp-content/uploads/2015/01/linq4.gif" height="200px" align="middle"  />
 
 ***
-sqldf is a powerful R package that allows 1) the use of SQLite syntax to be used directly on data frames, and 2) can create mini-SQLlite databases.
-
-Here's how to install sqldf:
-
-    install.packages("sqldf", dependencies = TRUE)  
-    library("sqldf")
-
-***
 
 ## `data`
 For this section, let's first start by:
@@ -76,6 +68,14 @@ For this section, let's first start by:
 
 - **cp** the mammal_stats.csv file into the sqldf folder or [download]()
 
+***
+Check your working directory, make a new folder called sqldf
+
+    setwd("~/Desktop/workshop/sqldf")
+    
+    getwd()
+
+***
 - create a new R file called **sqldf-lesson.R** and save it into the sqldf folder
 
 - commit your changes to github!
@@ -85,12 +85,15 @@ Clear that working memory...
 
     rm(list = ls())
 
-***
-Check your working directory, make a new folder called sqldf
 
-    setwd("~/Desktop/workshop/sqldf")
-    
-    getwd()
+***
+
+sqldf is a powerful R package that allows 1) the use of SQLite syntax to be used directly on data frames, and 2) can create mini-SQLlite databases.
+
+Here's how to install sqldf:
+
+    install.packages("sqldf", dependencies = TRUE)  
+    library("sqldf")
 
 ***
 
@@ -140,7 +143,7 @@ SQLite gives you more ways with Select. Select statements using SQLite * indicat
 
     sqldf("select * from mammals where `order`='Carnivora' limit 3")
     
-    sqldf("select * from mammals where `order`='Carnivora' order by `adult_body_mass_g` limit 10")
+    sqldf("select * from mammals where `order`='Carnivora' order by `adult_body_mass_g` desc limit 10")
 
 **TIP**: The opposite of desc is **asc**
 
@@ -151,7 +154,7 @@ Select based on wildcard searching.
     sqldf("select * from  mammals `order` where species like 'Canis%'")
 
 ***
-    Select, change and create new data frames
+    Select and change column name
 
     sqldf("select distinct `order` as taxonOrder from mammals")
     
@@ -226,82 +229,68 @@ We have come far! Now, lets figure out how to do more complex actions in SQLite 
 ***
  <img src="https://s-media-cache-ak0.pinimg.com/736x/e3/e9/02/e3e90236dfce025c9f4ac9aec842f246.jpg" height="300px" align="middle"  />
 
-***
-
-Merging or joining data frames
-
-    A <- data.frame(a1 = c(1, 2, 1), a2 = c(2, 3, 3), a3 = c(3, 1, 2))
-    
-    B <- data.frame(b1 = 1:2, b2 = 2:1)
-    
-    sqlMerge <- sqldf("select * from A, B")
-
-    head(sqlMerge)
-    
-***
-    
-Let's do this with our concatinated string for the mammal names. Remember the taxonString data frame created from editing mammalsEdited?
-
-    head(taxonString)
-    
-    head(mammalsEdited)
-
 
 ***
-we can merge in a simple way, but it just sticks the data frames together
-    
-    sqlMergeMammals <- sqldf("select * from taxonString,mammalsEdited")
-    
-    head(sqlMergeMammals)
+#Joining data frames
 
-***
 Let's make the merge in a way we can select values from 2 different data frames and put them together in a new data frame
 
-    sqlJoinMammals <- sqldf("select taxonOrder,mass,mammalsEdited.species,taxonString.name from mammalsEdited join taxonString on taxonString.species=mammalsEdited.species")
+    mammalCounts <- sqldf("select count(*) as orderTotal, species from mammals group by `order`")
 
-    head(sqlJoinMammals)
+    sqldf("select count(*) from mammals where `order` = 'Afrosoricida'")
     
- 
-***
-> **Exercise 3**:
-> Create a new dataframe that counts the number of species for every order. Then join that data frame as a new column in the sqlJoinMammals data frame.
+	head(mammalCounts)
+    
+    sqlJoinMammalsCount <- sqldf("select * from mammals join mammalCounts on mammals.species = mammalCounts.species")
 
-> **TIP**: We already did the counts in the data frame **numberSpecies**.
+	head(sqlJoinMammalsCount)
+
+***TIP***: Notice species is now in the dataframe twice! Why?
+    
+    sqlJoinMammalsCount <- sqldf("select mammals.*,mammalCounts.orderTotal from mammals join mammalCounts on mammals.species=mammalCounts.species")
+    head(sqlJoinMammalsCount)
+    
+***
 
 # Update and Delete values from a data frame
 
 ***
-Update a data frame
+Update a data frame by merging and overwriting the first dataframe
 
-    sql1 <- "update sqlJoinMammals set taxonOrder='Primates' where name='Artiodactyla-Camelus-dromedarius'"
+    sql1 <- "update sqlJoinMammalsCount set `order`='Primates' where species='Dromiciops gliroides'"
     
-    sql2 <- "select * from sqlJoinMammals"
+    sql2 <- "select * from sqlJoinMammalsCount"
     
-    sqldf(c(sql1, sql2))
-    
+   sqlJoinMammalsCount <- sqldf(c(sql1, sql2))
+
+sqldf(select * from sqlJoinMammalsCount where `order`='Primates')
     
 ***
 Delete values
 
-    noCarnivora <- sqldf(c("delete from sqlJoinMammals where taxonOrder='Carnivora'", "select * from sqlJoinMammals"))
+    sqlJoinMammalsCount <- sqldf(c("delete from sqlJoinMammalsCount where `order`='Dermoptera'", "select * from sqlJoinMammalsCount"))
 
-    head(noCarnivora)
+    head(sqlJoinMammalsCount)
     
 ***
+Insert a value
+    sqlJoinMammalsCount <- sqldf(c("insert into sqlJoinMammalsCount values (1,'Primates','New primate', 55.00,'',134,2,4)","select * from sqlJoinMammalsCount"))
 
-    updateValues <- sqldf(c("update sqlJoinMammals set mass = '28' where name='Artiodactyla-Camelus-dromedarius'", "select * from sqlJoinMammals"))
+    head(sqlJoinMammalsCount)
+    
+    sqldf("select * from sqlJoinMammalsCount where species='New Primate'")
+    
+    *** 
+> **Exercise 3**:
+> Insert a new record where litter size is NA, home range=134km, and body mass=55g)
 
-    head(updateValues)
-
-***
-> **Exercise 4**:  
- > Round the mass of all values in updateValues.
+***TIP***: NA is NULL in SQL
 
 ***
 
 # What we did not cover so far
 
-We covered basic syntax of sql using sqlLite syntax on data frames without actually creating a database. We did not cover creating a relational database or executing commands in conjunction with a database. 
+We covered basic syntax of sql using SQLite syntax on data frames without actually creating a database. We did not cover creating a relational database or executing commands in conjunction with a database. 
 
 #[SQL part II](https://mqwilber.github.io/2017-04-21-ucsb/sqldf-lesson_2)
 

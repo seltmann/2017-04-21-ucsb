@@ -44,56 +44,6 @@ Getting started where we left off...
 
 ***
 
-#Joining data frames
-
-Let's make the merge in a way we can select values from 2 different data frames and put them together in a new data frame
-
-    mammalCounts <- sqldf("select count(*) as orderTotal, species from mammals group by `order`")
-    sqldf("select count(*) from mammals where `order` = 'Afrosoricida'")
-    head(mammalCounts)
-    
-    sqlJoinMammalsCount <- sqldf("select * from mammals join mammalCounts on mammals.species = mammalCounts.species")
-    head(sqlJoinMammalsCount)
-    
-    sqlJoinMammalsCount <- sqldf("select mammals.*,mammalCounts.orderTotal from mammals join mammalCounts on mammals.species=mammalCounts.species")
-    head(sqlJoinMammalsCount)
-    
-***
-
-# Update and Delete values from a data frame
-
-***
-Update a data frame by merging and overwriting the first dataframe
-
-    sql1 <- "update sqlJoinMammalsCount set `order`='Primates' where species='Dromiciops gliroides'"
-    
-    sql2 <- "select * from sqlJoinMammalsCount"
-    
-   sqlJoinMammalsCount <- sqldf(c(sql1, sql2))
-    
-***
-Delete values
-
-    sqlJoinMammalsCount <- sqldf(c("delete from sqlJoinMammalsCount where `order`='Dermoptera'", "select * from sqlJoinMammalsCount"))
-
-    head(sqlJoinMammalsCount)
-    
-***
-Insert a value
-    sqlJoinMammalsCount <- sqldf(c("insert into sqlJoinMammalsCount values (1,'Primates','New primate', 55.00,'',134,2,4)","select * from sqlJoinMammalsCount"))
-
-    head(sqlJoinMammalsCount)
-    
-    sqldf("select * from sqlJoinMammalsCount where species='New Primate'")
-    
-    *** 
-> **Exercise 3**:
-> Insert a new record where litter size is NA
-
-***TIP***: NA is NULL in SQL
-
-***
-
 #Create a SQLite database
 
     db <- dbConnect(SQLite(), dbname="Mammaldb.sqlite")
@@ -157,7 +107,7 @@ Insert the data frame into the database
     dbWriteTable(conn = db, name = "Mammalcsv", value = mammals, row.names = TRUE)
     
 ***
-Disconnect at the end. Important if you have mulitple transactions happening in an R script
+Disconnect at the end. Important if you have multiple transactions happening in an R script
 
     dbDisconnect(db)
 
