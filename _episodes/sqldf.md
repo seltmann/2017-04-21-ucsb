@@ -105,7 +105,7 @@ First, read in the data frame as we did before using **read.csv**
     
     head(mammals)
     
-> **TIP**: header: logical: should the data frame use the first row as headers?
+***TIP*** header: logical: should the data frame use the first row as headers?
 
 ***
 
@@ -130,7 +130,7 @@ SQLite gives you more ways with Select. Select statements using SQLite * indicat
     sqldf("select distinct `order`,species from mammals")
 
 
-> **TIP**: The word ***order*** is a column name, but it is also a command reserved in SQL. Put column names in `` to avoid confusion.
+***TIP*** The word ***order*** is a column name, but it is also a command reserved in SQL. Put column names in `` to avoid confusion.
 
 **Select** using filters
 
@@ -145,7 +145,7 @@ SQLite gives you more ways with Select. Select statements using SQLite * indicat
     
     sqldf("select * from mammals where `order`='Carnivora' order by `adult_body_mass_g` desc limit 10")
 
-> **TIP**: The opposite of desc is **asc**
+***TIP*** The opposite of desc is **asc**
 
 ***
 
@@ -245,7 +245,7 @@ Let's make the merge in a way we can select values from 2 different data frames 
 
 	head(sqlJoinMammalsCount)
 
-> **TIP**: Notice species is now in the  data frame twice! Why?
+***TIP*** Notice species is now in the  data frame twice! Why?
     
     sqlJoinMammalsCount <- sqldf("select mammals.*,mammalCounts.orderTotal from mammals join mammalCounts on mammals.species=mammalCounts.species")
     head(sqlJoinMammalsCount)
@@ -285,7 +285,7 @@ Insert a value
 > **Exercise 3**:
 > Insert a new record where litter size is NA, home range=134km, and body mass=55g)
 
-> **TIP**: NA is NULL in SQL
+***TIP*** NA is NULL in SQL
 
 ***
 
