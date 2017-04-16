@@ -93,17 +93,34 @@ Insert a single record
     head(mammals)
 
 ***
-Insert the data frame into the database
+**Insert** the data frame into the database
 
     dbWriteTable(conn = db, name = "Mammalcsv", value = mammals, row.names = TRUE)
     dbReadTable(db, "Mammalcsv")
 
 ***
-*Write* query from database to data frame
+**Write** query from database to data frame
 
 results <- dbGetQuery(db, "SELECT species, avg(litter_size) FROM Mammalcsv GROUP BY species;")
 
 head(results)
+
+***
+**SQL** in R functions
+
+library(RSQLite)
+
+db <- dbConnect(SQLite(), "Mammaldb.sqlite")
+
+getName <- function(orderName) {
+  query <- paste0("SELECT `order` || '-' || species FROM Mammalcsv WHERE `order` =='",orderName, "';")
+  return(dbGetQuery(db, query))
+}
+
+print(paste("species:", getName('Tubulidentata')))
+
+dbDisconnect(connection)
+
 
 ***
 Disconnect at the end. Important if you have multiple transactions happening in an R script
