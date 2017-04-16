@@ -19,11 +19,15 @@ objectives:
 - [reference]()
 - [SQLite function reference](https://www.sqlite.org/lang_corefunc.html)
 
-# What is a relational database?
+# What is a database?
 
-A relational database is a way to store and manipulate information. Databases are arranged as tables. Each table has columns (also known as fields) that describe the data, and rows (also known as records) which contain the data.
+A database is a way to store and manipulate information. Databases are arranged as tables. Each table has columns (also known as fields) that describe the data, and rows (also known as records) which contain the data.
 
 When we are using a spreadsheet, we put formulas into cells to calculate new values based on old ones. When we are using a database, we send commands (usually called queries) to a database manager: a program that manipulates the database for us. The database manager does whatever lookups and calculations the query specifies, returning the results in a tabular form that we can then use as a starting point for further queries.
+
+# What is a relational database?
+
+A database that relates one value in one table to a value in another table.
 
 # What is SQL?
 
@@ -62,9 +66,9 @@ Here's how to install sqldf:
 ## `data`
 For this section, let's first start by:
 
-- createing a new folder for our **sqldf** lesson
+- create a new folder for our **sqldf** lesson in our ~/Desktop/workshop folder
 
-- **cp** the mammal_stats.csv file into the sqldf folder
+- **cp** the mammal_stats.csv file into the sqldf folder or [download]()
 
 - create a new R file called **sqldf-lesson.R** and save it into the sqldf folder
 
@@ -78,7 +82,7 @@ Clear that working memory...
 ***
 Check your working directory, make a new folder called sqldf
 
-    setwd("~/Desktop/workshop")
+    setwd("~/Desktop/workshop/sqldf")
     
     getwd()
 
@@ -289,9 +293,9 @@ Delete values
 
 ***
 
-# What we did not cover
+# What we did not cover so far
 
-We covered basic syntax of sql using sqlLite syntax on data frames without actually creating a database. We did not cover creating a database or executing commands in conjunction with a database. There are a lot of good tutorials online to learn more:
+We covered basic syntax of sql using sqlLite syntax on data frames without actually creating a database. We did not cover creating a relational database or executing commands in conjunction with a database. 
 
-- [Sandy Muspratt's R Blog](http://sandymuspratt.blogspot.com/2012/11/r-and-sqlite-part-1.html)
+#[Sandy Muspratt's R Blog](http://sandymuspratt.blogspot.com/2012/11/r-and-sqlite-part-1.html)
 
