@@ -132,12 +132,15 @@ SQLite gives you more ways with Select. Select statements using SQLite * indicat
 
 ***TIP*** The word ***order*** is a column name, but it is also a command reserved in SQL. Put column names in `` to avoid confusion.
 
+***
+
 **Select** using filters
 
     sqldf("select * from mammals where `order`='Carnivora'")
     
     sqldf("select `order`, species from mammals where `order`='Carnivora'")
     
+***
 
 **Select** using limits and ordering
 
@@ -149,17 +152,17 @@ SQLite gives you more ways with Select. Select statements using SQLite * indicat
 
 ***
 
-Select based on wildcard searching.
+**Select** based on wildcard searching.
 
     sqldf("select * from  mammals `order` where species like 'Canis%'")
 
 ***
-    Select and change column name
+**Select** and change column name
 
     sqldf("select distinct `order` as taxonOrder from mammals")
     
 ***
-Select all where litter_size is not NA
+**Select** all where litter_size is not NA
 
     sqldf("select * from mammals where litter_size is not null limit 10")
     
@@ -170,26 +173,26 @@ Select all where litter_size is not NA
 
 ***
 
-Save your output to a new data frame
+**Save** your output to a new data frame
     
     mammalsEdited <-  sqldf("select `order` as taxonOrder, species, adult_body_mass_g as mass from mammals")
     
     head(mammalsEdited)
 
 ***
-Concatenation
+**Concatenation**
 
     sqldf("select taxonOrder || '-' || species as name from mammalsEdited limit 10")
 
 ***
-Remove white space
+**Remove** white space
 
     taxonString <- sqldf("select species, taxonOrder || '-' || replace(species,' ','-') as name from mammalsEdited limit 10")
     
     head(taxonString)
 
 ***
-Counting using SQLite by Groups and then making quick and simple bar plots
+Counting using SQLite by **Groups** and then making quick and simple bar plots
 
     numberSpecies <- sqldf("select count(species) as cnt,taxonOrder from mammalsEdited group by taxonOrder order by cnt desc")
     
@@ -201,7 +204,7 @@ Counting using SQLite by Groups and then making quick and simple bar plots
 
 
 ***
-Finding maximum and minimum
+Finding **maximum** and **minimum**
 
     sqldf("select max(adult_body_mass_g) from mammals")
     
@@ -254,7 +257,6 @@ Let's make the merge in a way we can select values from 2 different data frames 
 
 # Update and Delete values from a data frame
 
-***
 Update a data frame by merging and overwriting the first  data frame
 
     sql1 <- "update sqlJoinMammalsCount set `order`='Primates' where species='Dromiciops gliroides'"
