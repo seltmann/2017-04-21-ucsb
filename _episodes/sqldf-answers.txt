@@ -1,0 +1,14 @@
+Exercise 1:
+
+head(mammals)
+sqldf("select distinct species, litter_size from mammals where litter_size<'1'")
+sqldf()
+
+
+Exercise 2:
+newFile <- sqldf("select distinct upper(taxonOrder) from mammalsEdited")
+head(newFile)
+
+
+Exercise 3: 
+    sqlJoinMammalsCount <- sqldf(c("insert into sqlJoinMammalsCount values (1,'Primates','New primate', 55.00,'',134,NULL,4)","select * from sqlJoinMammalsCount"))

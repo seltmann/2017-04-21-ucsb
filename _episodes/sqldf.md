@@ -8,6 +8,12 @@ objectives:
 - Understand what a database is and when is it useful
 - Understand SQL syntax using SQLlite database manager directly on data frames
 - Understand how to start building a relational database
+keypoints:
+
+keypoints:
+- SQL is powerful for manipulating dataframes
+- "FIXME"
+- "FIXME"
 
 ---
 
