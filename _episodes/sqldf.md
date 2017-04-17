@@ -66,7 +66,7 @@ For this section, let's first start by:
 
 - create a new folder for our **sqldf** lesson in our ~/Desktop/workshop folder
 
-- **cp** the mammal_stats.csv file into the sqldf folder or [Download the data here](../data/mammal_stats.csv)
+- **cp** the mammal_stats.csv file into the sqldf folder or [download the data here](../data/mammal_stats.csv)
 
 ***
 Check your working directory, make a new folder called sqldf
