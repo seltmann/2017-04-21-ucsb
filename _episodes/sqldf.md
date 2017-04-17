@@ -24,6 +24,7 @@ keypoints:
 - [answers to exercises](https://mqwilber.github.io/2017-04-21-ucsb/sqldf-answers.txt)
 - [reference](https://swcarpentry.github.io/sql-novice-survey/reference/)
 - [SQLite function reference](https://www.sqlite.org/lang_corefunc.html)
+- [test data link](../data/mammal_stats.csv)
 
 # What is a database?
 
