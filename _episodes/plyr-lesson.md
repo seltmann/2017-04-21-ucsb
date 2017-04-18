@@ -1,16 +1,17 @@
 ---
-title: Data Manipulation - plyr
-teaching: FIX
-exercises: FIX
+title: Data Manipulation - dplyr
+teaching: 65
+exercises: 10
 questions:
-- "FIXME"
+- Data Wrangling in R 
 objectives:
-- "FIXME"
-- "FIXME"
+- Introduction to the "Tidyverse"
+- Data manipulation, filtering, stats with dplyr
+- Pipes
 keypoints:
-- "FIXME"
+
 keypoints:
-- "FIXME"
+- Dplyr 
 - "FIXME"
 - "FIXME"
 ---
@@ -30,14 +31,15 @@ By the end of this lesson, you should be able to:
 Summarizing and Operating: the dPlyr world
 ---------------------------------
 
-For this section, let's load the file [mammal_stats.csv](https://raw.githubusercontent.com/mqwilber/2016-04-14-ucsb/gh-pages/lessons/plyr_reshape/mammal_stats.csv). This is a subset of a *["species-level database of extant and recently extinct mammals](http://esapubs.org/archive/ecol/E090/184/)*. 
+For this section, let's load the file `mammal_stats.csv` again. This is a subset of a *["species-level database of extant and recently extinct mammals](http://esapubs.org/archive/ecol/E090/184/)*. 
 
-Let's download this file from the git repository, and load it as: 
+You may already have this loaded in your current R Studio Session, but if not, you know the drill: 
+
     mammals <- read.csv('mammal_stats.csv')
 
-You'll notice that as we work on larger datasets, viewing and visualizing the entire dataset can become more and more difficult. Similarly, analyzing the datasets becomes more complex. Is there a good way to be able to summarize datasets succinctly, and to be able to analyze subsets of a dataset automatically? 
+You'll notice that as we work on larger datasets, viewing and visualizing the entire dataset can become more and more difficult. Similarly, analyzing the datasets becomes more complex. While SQL gives us useful tools for managing big datasets, There are other tools in R that I find helpful for dealing with medium-size datasets such as this - both for stats and for visualization.
 
-The answer lies in a handy library called `dplyr`. `dplyr` will allow us to perform more complex operations on datasets in intuitive ways.
+The answer lies in a handy library called `dplyr`. `dplyr` will allow us to perform more complex operations on single dataframes in intuitive ways.
 
 First off, though, let's explore some very handy sorting and viewing functions in `dplyr`. `glimpse()` is a quick and pretty alternative to `head()`:
 
@@ -75,7 +77,9 @@ You can see how these can be immediately helpful for certain tasks. A lot of the
 > The bumblebee bat. *Wikipedia Commmons*
 
 
-With these large datasets, `dplyr` also lets you quickly summarize the data. It operates on a principle called *[split - apply - recombine](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.182.5667&rep=rep1&type=pdf)* : we will *split* up the data, *apply* some sort of operation, and *combine* the results to display them. Suppose we want to find the average body masss of each order. We first want to *split* up the data by order using the function `group_by()`, *apply* the `mean()` function to the column `adult_body_mass_g`, and report all of the results using the function `summarise()`. 
+With these large datasets, `dplyr` also lets you quickly summarize the data. It operates on a principle called *[split - apply - recombine](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.182.5667&rep=rep1&type=pdf)* which is a key component of the `tidyverse`: we will *split* up the data, *apply* some sort of operation, and *combine* the results to display them. 
+
+Suppose we want to find the average body masss of each order. We first want to *split* up the data by order using the function `group_by()`, *apply* the `mean()` function to the column `adult_body_mass_g`, and report all of the results using the function `summarise()`. 
 
     a <- group_by(mammals, order)
     summarize(a, mean_mass = mean(adult_body_mass_g, na.rm = TRUE))
@@ -137,12 +141,15 @@ This lets us see that many of the animals relatively large for their size are ro
 > Which species of carnivore has the largest body length to body mass ratio? (Hint: that's `adult_head_body_len_mm / adult_body_mass_g')`
 > 
 
+*Hint* 
+
 
 **Sources and Umi's additional tips/tricks:**
 
-* The best cheat sheet for data wrangling in R: [Data Wrangling in dplyr and tidyr](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf)
+* There are some great cheatsheets you should check out [here](https://www.rstudio.com/resources/cheatsheets/). The material from this lesson plan is a small part of `Data Transformation Cheat Sheet`
+
 * A great set of slides that expounds on this: [Date Wrangling in R](http://ucsb-bren.github.io/env-info/wk03_dplyr/wrangling-webinar.pdf)
 * This is where I learned dplyr: [Sean Anderson](http://seananderson.ca/2014/09/13/dplyr-intro.html). He actually helped me over twitter in suggesting dPlyr - so a shout-out to him for being awesome and accessible!
 * This is another dplyr tutorial that may help in addition to that first one: [Kevin Markham](http://rpubs.com/justmarkham/dplyr-tutorial)
-* Sometimes `dPlyr` might not do exactly what you want. In reality, `dPlyr` is a streamlined version of a more powerful (but slower) library called `plyr`. [Sean Anderson's plyr tutorial](https://www.google.com/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8#q=plyr). While `dplyr` always takes in a dataframe and outputs a dataframe (summarize and mutate), `plyr` can take in a dataframe, list, or array and output a dataframe, list, or array. There are also individual R functions that go from array to array (`apply`) or data frame to data frame (`aggregate`) but plyr brings them all under one roof for easier syntax. 
+* Sometimes `dPlyr` might not do exactly what you want. In reality, `dPlyr` is a streamlined version of an older, slightly more powerful (but slower) library called `plyr`. [Sean Anderson's plyr tutorial](https://www.google.com/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8#q=plyr). While `dplyr` always takes in a dataframe and outputs a dataframe (summarize and mutate), `plyr` can take in a dataframe, list, or array and output a dataframe, list, or array. There are also individual R functions that go from array to array (`apply`) or data frame to data frame (`aggregate`) but plyr brings them all under one roof for easier syntax. 
 
