@@ -15,7 +15,7 @@ keypoints:
 - "FIXME"
 ---
 
-*by Thomas C. Smith, based on material by Naupaka Zimmerman, Andrew Tredennick, & Kartik Ram*
+*by Umi Hoshijima and Thomas Smith, based on material by Naupaka Zimmerman, Andrew Tredennick, & Kartik Ram*
 
 **Supplementary Material**: [answers to exercises](ggplot-lesson-answers.R)
 
@@ -28,11 +28,7 @@ keypoints:
 - Defines components of a figure.
 - Coherent, consistent syntax for a range of plotting.
 
-# Let's compare two plots of the same data: 
-
-<img src="http://mqwilber.github.io/2016-04-14-ucsb/lessons/ggplot/TalesnWhales_base.png" height="200px" align="center">
-
-<img src="http://mqwilber.github.io/2016-04-14-ucsb/lessons/ggplot/TalesnWhales_ggplot.png" height="200px" align="center">  
+Let's compare two plots of the same data.
 
 ### Here are the codes to make plots of body size vs. litter size:
 
@@ -65,10 +61,10 @@ entirely customizable|fiddly for adjusting positions, sizes, etc.|
 
 # Getting Started:
 
-Let's install and load our `ggplot2` package.  We might also use our `dPlyr` skills later in this lesson, so lets make sure we have that package ready to go to. 
+Let's install and load our `ggplot2` package.  We'll aslo be using some plyr here. 
 
 ~~~
-install.packages("ggplot2", dependencies = TRUE)  
+install.packages("ggplot2")
 library(ggplot2)
 library(dplyr)
 ~~~
@@ -93,9 +89,9 @@ There are several essential parts of any plot, and in `ggplot2`, they are:
   
 1. the function: `ggplot()`
 2. the arguments:
-    - **data**
-    - **aes**
-    - **geom**
+    - **data** - the dataframe
+    - **aes** - the "aesthetics", or what columns to use 
+    - **geom** - the type of graph
     - stats
     - facets
     - scales
@@ -290,8 +286,7 @@ Then, here, we create a new subset for just a few orders, because 29 orders is a
 
 ~~~   
 OrderSubset<-filter(mammals, order == "Rodentia" | order == "Cetacea" | order=="Primates" | order=="Carnivora") 
-OrderSubset$RangeCategory <- factor(OrderSubset$RangeCategory, levels = c("micro_machines", "homebodies", "strollers", "roamers", "free_agents", "transcendentalists"))
-OrderSubset$order <- factor(OrderSubset$order, levels = c("Rodentia", "Carnivora", "Primates", "Cetacea"))
+
 ~~~
 {: .r}
 
