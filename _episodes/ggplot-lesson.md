@@ -1,18 +1,22 @@
 ---
 title: ggplot
-teaching: FIX
-exercises: FIX
+teaching: 65
+exercises: 10
 questions:
-- "FIXME"
+- How do I make cool, complex graphs easily in R?
 objectives:
-- "FIXME"
-- "FIXME"
+- Continuing in the TidyVerse
+- Plotting using ggplot
+- Using different colors, grouping data, subplots.
 keypoints:
-- "FIXME"
+
 keypoints:
-- "FIXME"
-- "FIXME"
-- "FIXME"
+- What is ggplot?  And why have multiple graphics tools?
+- Parts of a ggplot figure: *ggplot, data, aes, geom*.
+- Using mapping to make your figures more informative.
+- How *facets* are helpful and how to make them.
+- Using themes to make your figures more pleasing.
+- Saving figures.
 ---
 
 *by Umi Hoshijima and Thomas Smith, based on material by Naupaka Zimmerman, Andrew Tredennick, & Kartik Ram*
@@ -32,7 +36,7 @@ Let's compare two plots of the same data.
 
 ### Here are the codes to make plots of body size vs. litter size:
 
-`plot(adult_head_body_len_mm~adult_body_mass_g, data=mammals)`
+`plot(adult_head_body_len_mm ~ adult_body_mass_g, data=mammals)`
 
 OR
 
@@ -50,6 +54,7 @@ consistent, concise syntax | different syntax from the rest of R|
 intuitive (to many) | does not handle a few types of output well|
 visually appealing by default | |
 entirely customizable | |  
+Easy to standardize formatting between graphs | | 
 
 base graphics Pros:|base graphics Cons:|
 -|-|
@@ -61,7 +66,7 @@ entirely customizable|fiddly for adjusting positions, sizes, etc.|
 
 # Getting Started:
 
-Let's install and load our `ggplot2` package.  We'll aslo be using some plyr here. 
+Let's install and load our `ggplot2` package.  We'll aslo be using some dplyr here as well.
 
 ~~~
 install.packages("ggplot2")
@@ -363,58 +368,20 @@ ggplot(data=OrderSubset, aes(x=adult_body_mass_g))+
 {: .r}
 
 
-
-Obviously, you can really go nuts with themes... and create your own customs:
-
+These themes can get very overwhelming, even for an intermediate ggplot user. Luckily, there is a package developed to help you through the appearance of your plots: 
 ~~~
-install.packages("wesanderson")
-library(wesanderson)
+install.packages("ggThemeAssist")
 ~~~
 {: .r}
 
-
-To see color palettes:
-
-~~~
-wes_palette("Royal1")
-~~~
-{: .r}
-
-
-For those studying predation/medium sized mammals/trophic cascades, try:
+`ggThemeAssist` sworks a little differently from your garden-variety package - it is an addon for R Studio and so you don't have to use `library()` before its use. It works by having you save a plot to a variable - then you highlight the variable name and select "ggThemeAssitant" from the Add-in menu. 
 
 ~~~
-wes_palette("FantasticFox")
+a = ggplot(data=mammals, aes(x=adult_body_mass_g, y=adult_head_body_len_mm))+
+  geom_point()
+
 ~~~
 {: .r}
-
-    
-...and for the marine biologists (or their interns):
-
-~~~
-wes_palette("Zissou")
-~~~
-{: .r}
-
-    
-Lets apply the Fantastic Fox palette (because, mammals), and default theme `theme_bw()` to our histogram figure.  We can actually add multiple theme elements and arguments, allowing you to start with the nice looking default, and tweak it:
-
-~~~ 
-myplot<-ggplot(data=OrderSubset, aes(x=adult_body_mass_g))+
-          geom_histogram(aes(fill=order), color="black", size=0.25)+
-          scale_x_log10()+
-          facet_grid(RangeCategory~order, scales="free")+
-          scale_fill_manual(values = wes_palette("FantasticFox")) + 
-          theme_bw()+
-          theme(legend.key=element_rect(fill=NA),
-            legend.position="bottom",
-            axis.title=element_text(angle=0, size=18, face="bold"),
-            legend.text=element_text(angle=0, size=12, face="bold"),
-            panel.background=element_rect(fill=NA))
-~~~
-{: .r}
-
-
 
 ***
 
@@ -458,12 +425,6 @@ ggplot2 will probably not replace all other graphics tools.  You may still use b
 
 Graphics are an important part of the process of scientific computing and research - from data exploration to communication.  We hope we have shown you the building blocks for making figures that help you discover new things about your self!
 
-> ## Key Points
-> * What is ggplot?  And why have multiple graphics tools?
-> * Parts of a ggplot figure: *ggplot, data, aes, geom*.
-> * Using mapping to make your figures more informative.
-> * How *facets* are helpful and how to make them.
-> * Using themes to make your figures more pleasing.
-> * Saving figures.
+
 
 ***

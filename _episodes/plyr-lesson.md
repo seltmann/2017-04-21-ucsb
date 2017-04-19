@@ -11,9 +11,8 @@ objectives:
 keypoints:
 
 keypoints:
-- Dplyr 
-- "FIXME"
-- "FIXME"
+- Dplyr is a great tool for exploring data
+- Pipes can make your code more legible and more logical
 ---
 
 *Prepared by [Umihiko Hoshijima](mailto:umihiko.hoshijima@lifesci.ucsb.edu), Inspiration/Material from Sean Anderson in [Reshape2](http://seananderson.ca/2013/10/19/reshape.html) and [dplyr](http://seananderson.ca/2014/09/13/dplyr-intro.html)*
@@ -67,7 +66,7 @@ We can also select certain rows using the function `filter()`. As rows aren't na
 ~~~
     filter(mammals, order == "Carnivora") # only carnivores
     filter(mammals, order == "Carnivora" & adult_body_mass_g < 5000) # only carnivores smaller than 5kg
-    filter(mammals, order == "Carnivora" | order == "Primates") #Any carnivore or primate
+    filter(mammals, order == "Carnivora" | adult_body_mass_g <= 5000) #Any carnivore or animal less than or equal to 5kg
 ~~~
 {: .r}
 
@@ -178,7 +177,7 @@ This lets us see that many of the animals relatively large for their size are ro
 > Which species of carnivore has the largest body length to body mass ratio? (Hint: that's `adult_head_body_len_mm / adult_body_mass_g')`
 > 
 
-*Hint* 
+*Hint* For "the most species", try length(species). 
 
 
 **Sources and Umi's additional tips/tricks:**
