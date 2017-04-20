@@ -18,7 +18,7 @@ keypoints:
 *Prepared by [Umihiko Hoshijima](mailto:umihiko.hoshijima@lifesci.ucsb.edu), Inspiration/Material from Sean Anderson in [Reshape2](http://seananderson.ca/2013/10/19/reshape.html) and [dplyr](http://seananderson.ca/2014/09/13/dplyr-intro.html)*
 
 
-**Supplementary Material**: [answers to exercises](./plyr_answers.R)
+**Supplementary Material**: [answers to exercises](https://mqwilber.github.io/2017-04-21-ucsb/plyr_answers.R)
 
 
 Goals
