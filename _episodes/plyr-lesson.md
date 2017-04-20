@@ -17,6 +17,10 @@ keypoints:
 
 *Prepared by [Umihiko Hoshijima](mailto:umihiko.hoshijima@lifesci.ucsb.edu), Inspiration/Material from Sean Anderson in [Reshape2](http://seananderson.ca/2013/10/19/reshape.html) and [dplyr](http://seananderson.ca/2014/09/13/dplyr-intro.html)*
 
+
+**Supplementary Material**: [answers to exercises](plyr_answers.R)
+
+
 Goals
 -----
 
@@ -26,6 +30,7 @@ By the end of this lesson, you should be able to:
 
 1. use `dplyr` examples to understand the principles behind this method of data analysis
 2. Streamline and increase legibility of code by using `pipes`
+
 
 Summarizing and Operating: the dPlyr world
 ---------------------------------
