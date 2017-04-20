@@ -21,7 +21,7 @@ keypoints:
 
 *by Umi Hoshijima and Thomas Smith, based on material by Naupaka Zimmerman, Andrew Tredennick, & Kartik Ram*
 
-**Supplementary Material**: [answers to exercises](ggplot-lesson-answers.R)
+**Supplementary Material**: [answers to exercises](./ggplot-lesson-answers.R)
 
 # What is ggplot?
 
