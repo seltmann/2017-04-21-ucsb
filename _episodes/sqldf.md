@@ -146,7 +146,7 @@ SQLite gives you more ways with Select. Select statements using SQLite * indicat
 
     sqldf("select * from mammals where `order`='Carnivora' limit 3")
     
-    sqldf("select * from mammals where `order`='Carnivora' order by `adult_body_mass_g` desc limit 10")
+    sqldf("select * from mammals where `order`='Carnivora' order by adult_body_mass_g desc limit 10")
 
 ***TIP*** The opposite of desc is **asc**
 
