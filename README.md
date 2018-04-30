@@ -1,4 +1,4 @@
-The website for this repo can be found [here](https://mqwilber.github.io/2017-04-21-ucsb/)
+The website for this repo can be found [here](https://seltmann.github.io/2018-04-05-ucsb/)
 
 # workshop-template
 
