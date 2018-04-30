@@ -1,26 +1,20 @@
 ---
-title: Data Wrangling and Plotting with dplyr and ggplot2
+title: Data Manipulation - dplyr
 teaching: 65
 exercises: 10
 questions:
 - Data Wrangling in R 
-- How do I work with data to make cool, complex graphs easily in R
 objectives:
-- Working in the TidyVerse
-- Plotting using ggplot
-- Using different colors, grouping data, subplots.
+- Introduction to the "Tidyverse"
+- Data manipulation, filtering, stats with dplyr
+- Pipes
 keypoints:
 
 keypoints:
 - Dplyr is a great tool for exploring data
 - Pipes can make your code more legible and more logical
-- What is ggplot?  And why have multiple graphics tools?
-- Parts of a ggplot figure: *ggplot, data, aes, geom*.
-- Using mapping to make your figures more informative.
-- How *facets* are helpful and how to make them.
-- Using themes to make your figures more pleasing.
-- Saving figures.
 ---
+
 
 
 
