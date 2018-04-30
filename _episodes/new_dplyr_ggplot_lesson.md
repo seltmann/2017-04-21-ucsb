@@ -3,12 +3,13 @@ title: Data Wrangling and Plotting with dplyr and ggplot2
 teaching: 65
 exercises: 10
 questions:
+- Data Wrangling in R 
 - How do I work with data to make cool, complex graphs easily in R?
 objectives:
 - Working in the TidyVerse
 - Plotting using ggplot
 - Using different colors, grouping data, subplots.
-
+keypoints:
 
 keypoints:
 - Dplyr is a great tool for exploring data
@@ -20,6 +21,8 @@ keypoints:
 - Using themes to make your figures more pleasing.
 - Saving figures.
 ---
+
+
 
 *by Umi Hoshijima, Corinne Fuchs, and Geraziella DiRenzo, based on material by Naupaka Zimmerman, Andrew Tredennick, & Kartik Ram*
 
