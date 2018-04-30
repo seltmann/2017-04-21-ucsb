@@ -4,7 +4,7 @@ teaching: 65
 exercises: 10
 questions:
 - Data Wrangling in R 
-- How do I work with data to make cool, complex graphs easily in R?
+- How do I work with data to make cool, complex graphs easily in R
 objectives:
 - Working in the TidyVerse
 - Plotting using ggplot
