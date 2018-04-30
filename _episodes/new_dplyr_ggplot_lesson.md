@@ -26,9 +26,21 @@ keypoints:
 
 *by Umi Hoshijima, Corinne Fuchs, and Geraziella DiRenzo, based on material by Naupaka Zimmerman, Andrew Tredennick, & Kartik Ram*
 
-# Intro to `ggplot`
 
-## What is ggplot?
+Goals
+-----
+The goal of this module is to give a brief introduction to the world of quick data analysis using `dplyr`, to serve as reference when working with your own datasets. You will be observing your manipulated data using the package `ggplot`. 
+
+By the end of this lesson, you should be able to: 
+
+1. Plot using ggplot
+2. use `dplyr` examples to understand the principles behind this method of data analysis
+3. Streamline and increase legibility of code by using `pipes`
+
+
+
+What is ggplot?
+---------
 
 - `ggplot2` is the package, `ggplot` is the function.
 - A package that provides graphics tools that differ from those available in `plot`.
@@ -38,7 +50,8 @@ keypoints:
 - Coherent, consistent syntax for a range of plotting.
 
 
-# Getting Started:
+Getting Started:
+--------
 
 Let's install and load our `ggplot2` package.  We'll aslo be using some dplyr here as well.
 
@@ -65,7 +78,8 @@ mammals <- read.csv(file.choose()) # to bring up a file dialog
 
 Let's compare two plots of the same data.
 
-### Here are the codes to make plots of body size vs. litter size:
+Here are the codes to make plots of body size vs. litter size:
+------
 
 `plot(adult_head_body_len_mm ~ adult_body_mass_g, data=mammals)`
 
@@ -75,9 +89,11 @@ OR
 
 Although the plots look similar, we can see differences in the basic structure of the code, and some of the default formatting.  The first is obvious, in which `plot(y~x)` means _"plot y with respect to x"_ which is pretty close to how we all learned to plot things back in the day.  That second line of code probably looks a little like gobbledygook.  But it won't help you get gold out of Gringott's until you understand all its parts.
 
-# So why do we need another plotting method, to make the same plot?
+So why do we need another plotting method, to make the same plot?
+-----------
 
-Both `plot` and `ggplot` can be used to make publication quality figures, and both certainly have limitations for some types of graphics.  Arguably, ggplot excels over base graphics for data exploration and consistent syntax, and we'll explore those in the end of the lesson.  
+
+Both `plot` and `ggplot` can be used to make publication quality figures, and both certainly have limitations for some types of graphics.  Arguably, ggplot excels over base graphics for data exploration and consistent syntax, and we'll explore those in the end of the lesson.  
 
 ggplot2 Pros:| ggplot2 Cons:|
 -|-|
@@ -100,7 +116,9 @@ entirely customizable|fiddly for adjusting positions, sizes, etc.|
 
 ***
 
-# Parts of a ggplot plot:
+Parts of a ggplot plot:
+-
+
 There are several essential parts of any plot, and in `ggplot2`, they are:
   
 1. the function: `ggplot()`
@@ -118,7 +136,8 @@ In `ggplot` you absolutely need the first three arguments: `data, aes, geom` to 
 
 ***
 
-## `ggplot()`
+###`ggplot()`
+
 Some people like to assign (`<-`) their plot function to a variable, like this:
 
 ~~~
@@ -128,7 +147,7 @@ myplot<-ggplot(...)
 
 ***
 
-## `data`
+### `data`
 - This is the data you want to plot
 - Must be a data.frame
 
@@ -149,7 +168,7 @@ myplot<-ggplot(data=mammals... )
 
 ***
 
-## `aes` 
+### `aes` 
 For **aes**thetics.
 
 How your data are to be visually represented.  `aes()` is an argument within `ggplot` that takes its own arguments, `aes(x=, y=)`.  These are your independent (x) variable and your dependent (y) variable.  `ggplot2` nerds call this *mapping*.  As I understand it, they mean that you are *mapping* data points by the data values, in a 'landscape' of a coordinate system based on your data. Mapping will be important later, when we add meaningful colors and symbols to differentiate things like mice and whales, based on a variable that corresponds to one of our mapped data points.
@@ -168,7 +187,7 @@ So far, we have told ggplot where to look for data (`data`), and how to represen
 
 ***
 
-## `geom` 
+### `geom` 
 For **geom**etry.  
 
 This is how we create the 'layer' we actually see as our figure.  
@@ -198,7 +217,9 @@ ggplot(data=mammals, aes(x=adult_body_mass_g, y=adult_head_body_len_mm))+
  
  When you run this code, Rstudio will automatically recognize the + and know that the lines should run together. You should produce a plot with points displaying our data. 
 
-## Plotting by order: challenges of more complex visualization
+Plotting by order: challenges of more complex visualization
+----
+
 ### Changing the aesthetics of a `geom` 
 
 This scatterplot is pretty simple. But what if we wanted to see which orders had which body sizes? 
@@ -229,7 +250,8 @@ ggplot(data=mammals, aes(x=adult_body_mass_g, y=adult_head_body_len_mm))+
 Thats a lot of orders to look at, and its hard to tell who's who.  Note however, the __automatically generated legend__.  __Yew!__  That doesn't happen in `plot`.  You get it automatically in when `ggplot` maps colors or shapes to categorical variables.  You can also manually control all those colors.  But, lets limit the number of Orders we are examining in our figure.  
 
 
-# Dplyr
+Dplyr
+----
 
 We can use `dplyr` here, which we have already loaded. You'll notice that as we work on larger datasets, viewing and visualizing the entire dataset can become more and more difficult. Similarly, analyzing the datasets becomes more complex. Dplyr can be helpful for dealing with medium-size datasets such as this - both for stats and for visualization. `dplyr` will allow us to perform more complex operations on single dataframes in intuitive ways.
 
@@ -294,20 +316,8 @@ Challenge: Make a scatterplot of weight vs. litter size, but only with Rodentia 
 color by order. 
 ***
 
-# Add in alpha, as well as log-scaling axes: 
-~~~
-ggplot(data=TailsnWhales, aes(x=adult_body_mass_g, y=litter_size, color = order))+
-  geom_point(size=3)+
-  scale_x_log10()
-~~~
-{: .r}
+Add in alpha, as well as log-scaling axes later.
 
-~~~
-ggplot(data=TailsnWhales, aes(x=adult_body_mass_g, y=litter_size, color = order))+
-  geom_point(size=3, alpha = .4)+
-  scale_x_log10()
-~~~
-{: .r}
 
 
 # boxplot of marine vs terrestrial body size?
@@ -411,6 +421,7 @@ mammals_summarize = summarize(mammals_group_order, mean_mass = mean(adult_body_m
 
 ggplot(mammals_summarize, aes(x = mean_mass, y = mean_len))+geom_point()
 ~~~
+{: .r}
 
 
 # group the same thing WITH pipes
@@ -491,7 +502,7 @@ ggplot(mammals1, aes(x = adult_head_body_len_mm, y = adult_body_mass_g))+geom_po
         panel.grid.minor = element_blank())+
   stat_smooth(method = "lm")
 ~~~
-
+{: .r}
 Let's save the plot and learn to save it in different sizes
 
 ~~~
