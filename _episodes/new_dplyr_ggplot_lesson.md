@@ -64,7 +64,7 @@ library(dplyr)
 ~~~
 {: .r}
 
-Then, import the mammals dataset 
+Then, import the `mammals` dataset. This is a subset of a *["species-level database of extant and recently extinct mammals](http://esapubs.org/archive/ecol/E090/184/)*. You can download it [HERE](https://seltmann.github.io/2018-04-05-ucsb/data/mammal_stats.csv). 
 
 ~~~
 #loading mammals dataset for ggplot exercise:
