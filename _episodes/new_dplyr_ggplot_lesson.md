@@ -87,12 +87,19 @@ Here are the codes to make plots of body size vs. litter size:
 plot(adult_head_body_len_mm ~ adult_body_mass_g, data=mammals)
 ~~~
 {: .r}
+![plot](https://seltmann.github.io/2018-04-05-ucsb/fig/ggplot_figs/first_plot.jpg.jpeg)
+
+
 OR
+
+
 
 ~~~
 ggplot(data=mammals, aes(x=adult_body_mass_g, y=adult_head_body_len_mm)) + geom_point()
 ~~~
 {: .r}
+
+![plot](https://seltmann.github.io/2018-04-05-ucsb/fig/ggplot_figs/first_plot_ggplot.jpg.jpeg)
 
 Although the plots look similar, we can see differences in the basic structure of the code, and some of the default formatting.  The first is obvious, in which `plot(y~x)` means _"plot y with respect to x"_, which is fairly standard in many functions in R (e.g. statistics).  That second line of code probably looks a little like gobbledygook.  But it won't help you get gold out of Gringott's until you understand all its parts.
 
