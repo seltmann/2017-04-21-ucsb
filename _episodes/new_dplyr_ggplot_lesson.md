@@ -336,8 +336,9 @@ filter(mammals, order == "Rodentia" | adult_body_mass_g > 1000000)
 ~~~
 {: .r}
 
-There's also cool functions in dplyr to select columns by name, or to arrange the dataframe by a certain column. 
-Let's make a simple mammals dataset that's just species and mass of terrestrial animals. Then we can find the heaviest terrestrial mammal: 
+There's also cool functions in dplyr to select columns by name (`select`), or to arrange the dataframe by a certain column (`arrange`). 
+
+Let's find the heaviest terrestrial mammal. Let's do this first by finding all terrestrial mammals. Then get rid of all the columns we don't need, then arrange what's left by size to figure out which one is the heaviest. 
 
 
 
@@ -360,41 +361,69 @@ Challenge: Make a scatterplot of weight vs. litter size, but only with Rodentia 
 color by order. 
 ***
 
-Add in alpha, as well as log-scaling axes later.
+
 
 
 
 # boxplot of marine vs terrestrial body size?
-We need to read in the file because we overwrote the object mammals when we were filtering. 
 
-After reading it in, we can specify the geom_boxplot to make a boxplot with different environments.
+Let's analyze the masses of mammals to see if they're different based on their habitat (marine or terrestrial). We can do this with a boxplot, adult body mass separated by habitat. 
+
+We're first going to make a simple plot before making it fancy: 
+
+~~~
+# Create a simple plot
+ggplot(data = mammals, aes(x = habitat, y = adult_body_mass_g))+geom_boxplot()
+~~~
+{: .r}
+
+This looks good, but clearly there are a few large numbers making this hard to visualize. Let's fix this by "log-transforming" the y axis: 
 
 
 ~~~
-mammals1 <- read.csv("mammal_stats.csv", head=T)
-
-# Create a simple plot
-ggplot(data = mammals1, aes(x = habitat, y = adult_body_mass_g))+geom_boxplot()
-
 # Make the y axis on the log scale
-ggplot(data = mammals1, aes(x = habitat, y = adult_body_mass_g))+geom_boxplot()+
+ggplot(data = mammals, aes(x = habitat, y = adult_body_mass_g))+geom_boxplot()+
   scale_y_log10()
+~~~
+{: .r}
 
-# Change boxplot color
-ggplot(data = mammals1, aes(x = habitat, y = adult_body_mass_g, fill = habitat))+geom_boxplot()+
+This looks good, but is a bit bland. We can change the colors of these box plots by which habitat they are from: 
+~~~
+# Change boxplot color by habitat
+ggplot(data = mammals, aes(x = habitat, y = adult_body_mass_g, fill = habitat))+geom_boxplot()+
+  scale_y_log10()
+~~~
+{: .r}
+
+These default colors are good for order, but are a bit unintuitive for marine vs. terrestrial. Let's use blue for marine, and green for terrestrial. You can set colors in R using a variety of methods, including hex codes and `rgb()`. You can also choose from some premade ones, and all of these can be found on [this color cheatsheet](https://www.nceas.ucsb.edu/~frazier/RSpatialGuides/colorPaletteCheatsheet.pdf). 
+~~~
+# Default colors are fairly unintuitive for marine vs terrestrial, so let's set manually: 
+ggplot(data = mammals, aes(x = habitat, y = adult_body_mass_g, fill = habitat))+geom_boxplot()+
   scale_y_log10()+
   scale_fill_manual(values = c("dodgerblue", "forestgreen"))
+~~~
+{: .r}
 
+Now just some last tidy-up for good practice: 
+~~~
 # Change the legend title
-ggplot(data = mammals1, aes(x = habitat, y = adult_body_mass_g, fill = habitat))+geom_boxplot()+
+ggplot(data = mammals, aes(x = habitat, y = adult_body_mass_g, fill = habitat))+geom_boxplot()+
   scale_y_log10()+
   scale_fill_manual(name = "Habitat", values = c("dodgerblue", "forestgreen"))
 
 # Change the x and y labels
-ggplot(data = mammals1, aes(x = habitat, y = adult_body_mass_g, fill = habitat))+geom_boxplot()+
+ggplot(data = mammals, aes(x = habitat, y = adult_body_mass_g, fill = habitat))+geom_boxplot()+
   scale_y_log10()+
   scale_fill_manual(name = "Habitat", values = c("dodgerblue", "forestgreen"))+
   labs(x = 'Habitat', y = 'Adult body mass (g)')
+
+# Change the title: 
+ggplot(data = mammals, aes(x = habitat, y = adult_body_mass_g, fill = habitat))+geom_boxplot()+
+  scale_y_log10()+
+  scale_fill_manual(name = "Habitat", values = c("dodgerblue", "forestgreen"))+
+  labs(x = 'Habitat', y = 'Adult body mass (g)', title = 'Body mass, by habitat')
+  
+  
 ~~~
 {: .r}
 
@@ -402,12 +431,11 @@ ggplot(data = mammals1, aes(x = habitat, y = adult_body_mass_g, fill = habitat))
 
 Great!
 
-# Jittered points on top of boxplot, x = habitat
+# Let's add multiple geoms: 
 
-Now, we are interested in seeing the datapoints on the boxplot. We simply add the function + geom_point()
-
+Suppose we are interested in seeing all of the individual datapoints in addition to the boxplot. That is as easy as using another `geom` in addition to `geom_boxplot`. If you just put `geom_point` at the end, it will plot points with the dataframe, x and y that you have already specified in the first ggplot call. 
 ~~~
-ggplot(data = mammals1, aes(x = habitat, y = adult_body_mass_g, fill = habitat))+geom_boxplot()+
+ggplot(data = mammals, aes(x = habitat, y = adult_body_mass_g, fill = habitat))+geom_boxplot()+
   scale_y_log10()+
   scale_fill_manual(name = "Habitat", values = c("dodgerblue", "forestgreen"))+
   labs(x = 'Habitat', y = 'Adult body mass (g)')+
@@ -418,7 +446,7 @@ ggplot(data = mammals1, aes(x = habitat, y = adult_body_mass_g, fill = habitat))
 Wait! They are all on top of each other! Let's fix that by using geom_jitter(), which as the name implies jitters the points.
 
 ~~~
-ggplot(data = mammals1, aes(x = habitat, y = adult_body_mass_g, fill = habitat))+geom_boxplot()+
+ggplot(data = mammals, aes(x = habitat, y = adult_body_mass_g, fill = habitat))+geom_boxplot()+
   scale_y_log10()+
   scale_fill_manual(name = "Habitat", values = c("dodgerblue", "forestgreen"))+
   labs(x = 'Habitat', y = 'Adult body mass (g)')+
@@ -429,26 +457,34 @@ ggplot(data = mammals1, aes(x = habitat, y = adult_body_mass_g, fill = habitat))
 AHHHH!!! So many points ontop of the terrestrial boxplot! Let's change the transparency of the points again using the argument "alpha"- and this allows us to see where points overlap.
 
 ~~~
-ggplot(data = mammals1, aes(x = habitat, y = adult_body_mass_g, fill = habitat))+geom_boxplot()+
+ggplot(data = mammals, aes(x = habitat, y = adult_body_mass_g, fill = habitat))+geom_boxplot()+
   scale_y_log10()+
   scale_fill_manual(name = "Habitat", values = c("dodgerblue", "forestgreen"))+
   labs(x = 'Habitat', y = 'Adult body mass (g)')+
-  geom_jitter(alpha = 0.3)
+  geom_jitter(alpha = 0.1)
 ~~~
 {: .r}
 
 One last neat thing you can do is add the orders as different colors to this boxplot as well.
 ~~~
-ggplot(data = mammals1, aes(x = habitat, y = adult_body_mass_g, fill = habitat))+geom_boxplot()+
+ggplot(data = mammals, aes(x = habitat, y = adult_body_mass_g, fill = habitat))+geom_boxplot()+
   scale_y_log10()+
   scale_fill_manual(name = "Habitat", values = c("dodgerblue", "forestgreen"))+
   labs(x = 'Habitat', y = 'Adult body mass (g)')+
-  geom_jitter(aes(x = habitat, y = adult_body_mass_g, col = order), alpha = 0.3)
+  geom_jitter(aes(x = habitat, y = adult_body_mass_g, col = order), alpha = 0.2)
 ~~~
 {: .r}
 
- 
-# BREAKTIME! 
+This is a lot to take in, but you get the general idea. Note that the order that you puts these geoms does matter. We have the points above the boxplot because we have geom_jitter after geom_boxplot. switching the two puts the boxplot above the points. 
+
+ ~~~
+ggplot(data = mammals, aes(x = habitat, y = adult_body_mass_g, fill = habitat))+
+  scale_y_log10()+
+  scale_fill_manual(name = "Habitat", values = c("dodgerblue", "forestgreen"))+
+  labs(x = 'Habitat', y = 'Adult body mass (g)')+
+  geom_jitter(aes(x = habitat, y = adult_body_mass_g, col = order), alpha = 0.2) + geom_boxplot()
+~~~
+{: .r}
  
  
 # back to dplyr: grouping
@@ -496,10 +532,10 @@ mammals %>%
 # facet marine/terrestrial things
 
 ~~~
-  ggplot(mammals1, aes(x = adult_head_body_len_mm, y = adult_body_mass_g))+geom_point(aes(color = order))+
+  ggplot(mammals, aes(x = adult_head_body_len_mm, y = adult_body_mass_g))+geom_point(aes(color = order))+
   scale_x_log10()+ scale_y_log10() + facet_grid(.~habitat)
 
-  ggplot(mammals1, aes(x = adult_head_body_len_mm, y = adult_body_mass_g))+geom_point(aes(color = order))+
+  ggplot(mammals, aes(x = adult_head_body_len_mm, y = adult_body_mass_g))+geom_point(aes(color = order))+
   scale_x_log10()+ scale_y_log10() + facet_grid(habitat~.)
 ~~~
 {: .r}
@@ -510,7 +546,7 @@ mammals %>%
 Let's make the background white, remove the major and minor lines, and adjust the text size of the axis text and axis titles, and change the background color to the facet names to "white".
 
 ~~~
-ggplot(mammals1, aes(x = adult_head_body_len_mm, y = adult_body_mass_g))+geom_point(aes(color = order))+
+ggplot(mammals, aes(x = adult_head_body_len_mm, y = adult_body_mass_g))+geom_point(aes(color = order))+
   scale_x_log10()+ scale_y_log10() + facet_grid(habitat~.)+
   theme_bw()+
   ylab("Adult body mass (g)")+
