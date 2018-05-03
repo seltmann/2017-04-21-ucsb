@@ -34,27 +34,29 @@ The goal of this module is to give a brief introduction to the world of quick da
 
 By the end of this lesson, you should be able to: 
 
-1. Plot using ggplot
+1. Plot using `ggplot`
 2. use `dplyr` examples to understand the principles behind this method of data analysis
 3. Streamline and increase legibility of code by using `pipes`
 
-
+What is a package? 
+----------
+- An R package extends the functionality of R beyond its out-of-the-box capabilities. Packages exist for all sorts of things (stats, 
+- Last I checked, there are over [12,000 official packages for R](https://cran.r-project.org/web/packages/available_packages_by_name.html). This is quite overwhelming, and generally you install what you need as you go. For inspiration, select packages are sorted into groups by function at the [CRAN Task View](https://cran.r-project.org/web/views/). 
 
 What is ggplot?
 ---------
 
-- `ggplot2` is the package, `ggplot` is the function.
-- A package that provides graphics tools that differ from those available in `plot`.
-- The 'gg' stands for grammar of graphics.  
+- `ggplot2` is the package, `ggplot` is the main function, but as you see we will use quite a few functions from `ggplot2` in this lesson.
+- The 'gg' stands for grammar of graphics.  
 - A syntax for making plots and figures.
 - Defines components of a figure.
 - Coherent, consistent syntax for a range of plotting.
 
 
-Getting Started:
+Getting Started with ggplot: 
 --------
 
-Let's install and load our `ggplot2` package.  We'll aslo be using some dplyr here as well.
+Let's install and load our `ggplot2` package.  We'll also be using some dplyr here as well.
 
 ~~~
 install.packages("ggplot2")
@@ -217,7 +219,7 @@ ggplot(data=mammals, aes(x=adult_body_mass_g, y=adult_head_body_len_mm))+
 
 
 
- To make this code formatted neatly, with `geom_point` on the second line, simply press enter after the `+` sign. Rstudio will automatically tab into the second line. 
+To make this code formatted neatly, with `geom_point` on the second line, simply press enter after the `+` sign. Rstudio will automatically tab into the second line. (Hint: to correctly tab any line automatically, put your cursor on the code line and type `cmd + i` (mac) or `ctrl + i ` (windows)).  
  
  When you run this code, Rstudio will automatically recognize the + and know that the lines should run together. You should produce a plot with points displaying our data. 
 
