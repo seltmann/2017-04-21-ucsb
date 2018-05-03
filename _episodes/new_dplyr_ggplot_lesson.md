@@ -254,7 +254,35 @@ ggplot(data=mammals, aes(x=adult_body_mass_g, y=adult_head_body_len_mm))+
 ~~~
 {: .r}
 
-Thats a lot of orders to look at, and its hard to tell who's who.  Note however, the __automatically generated legend__.  __Yew!__  That doesn't happen in `plot`.  You get it automatically in when `ggplot` maps colors or shapes to categorical variables.  You can also manually control all those colors.  But, lets limit the number of Orders we are examining in our figure.  
+Thats a lot of orders to look at, and its hard to tell who's who.  Note however, the __automatically generated legend__.  __Yew!__  That doesn't happen in `plot` very easily, but you get it automatically in when `ggplot` maps colors or shapes to categorical variables.  
+
+To do this kind of plot without using ggplot, you would need something to this effect: 
+~~~
+# Library to make color palettes - ggplot does this automatically
+install.packages('colorspace')
+library(colorspace)
+# make empty plot with space for the legend
+plot(adult_head_body_len_mm ~ adult_body_mass_g, data=mammals, type = 'n', 
+     xlim = c(0,200000000))
+# get lists for order
+orders = unique(mammals$order)
+# make colors 
+colors = rainbow_hcl(length(orders))
+# plot every order in a different color
+for (a in 1:length(orders)) {
+  dat_plot = mammals[mammals$order == orders[a],]
+  points(adult_head_body_len_mm ~ adult_body_mass_g, data=dat_plot, 
+         col = colors[a], pch = 16)
+}
+# get legend in the right place, and manually set values. 
+legend(120000000,23000, legend = orders, col = colors, cex = 0.5, pch = 16, ncol = 2)
+~~~
+{: .r}
+
+...ew. 
+
+
+I think you ge the idea. Let's limit the number of Orders we are examining in our figure. 
 
 
 Dplyr
