@@ -279,6 +279,8 @@ legend(120000000,23000, legend = orders, col = colors, cex = 0.5, pch = 16, ncol
 ~~~
 {: .r}
 
+![plot](https://seltmann.github.io/2018-04-05-ucsb/fig/ggplot_figs/mammals_baseplot_order.jpeg)
+
 ...ew. 
 
 
