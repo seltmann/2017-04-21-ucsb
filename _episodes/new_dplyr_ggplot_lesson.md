@@ -42,6 +42,7 @@ What is a package?
 ----------
 - An R package extends the functionality of R beyond its out-of-the-box capabilities. Packages exist for all sorts of things (stats, 
 - Last I checked, there are over [12,000 official packages for R](https://cran.r-project.org/web/packages/available_packages_by_name.html). This is quite overwhelming, and generally you install what you need as you go. For inspiration, select packages are sorted into groups by function at the [CRAN Task View](https://cran.r-project.org/web/views/). 
+- The two packages were are using here are part of the [Tidyverse]( https://www.tidyverse.org), a group of packages that are produced by the same team and work well together. These are generally great complementary packages for data science. 
 
 What is ggplot?
 ---------
@@ -488,12 +489,30 @@ ggplot(data = mammals, aes(x = habitat, y = adult_body_mass_g, fill = habitat))+
  
  
 # back to dplyr: grouping
+
+As you saw with the previous graph, this is a lot of data and challenging to visualize trends sometimes. we have a lot of species for each order, so let's go ahead and work towards some goals for data summarizing: 
+
+- what's the average mass of each order? 
+
+To do this, we need to first learn how to get average mass using the dplyr function `summarize`: 
+
 ~~~
+summary(mammals)
 summarize(mammals, mean_mass = mean(adult_body_mass_g))
 ?mean
 summarize(mammals, mean_mass = mean(adult_body_mass_g, na.rm = TRUE))
 
+# note this is the same as: 
+mean(mammals$ adult_body_mass_g, na.rm = TRUE) 
+
+~~~ 
+{: .r}
+
+This in itself doesn't seem super productive. We just found a longer, more complicated way to do something we already knew how to do! However, dplyr does have a trick up its sleeve: now that we have that, it's super easy to figure out the mean mass of each order: 
+
+~~~
 mammals_group_order = group_by(mammals, order)
+# This creates a new version of mammals that is tagged with the "group" order - that is, any summarize operation honors this grouping. 
 mammals_group_order
 mammals_summarize = summarize(mammals_group_order, mean_mass = mean(adult_body_mass_g, na.rm = TRUE))
 mammals_summarize = summarize(mammals_group_order, mean_mass = mean(adult_body_mass_g, na.rm = TRUE),
@@ -503,8 +522,34 @@ ggplot(mammals_summarize, aes(x = mean_mass, y = mean_len))+geom_point()
 ~~~
 {: .r}
 
+This is great! seems like this could save a TON of time for us. However, it is strange that we need to make this `mammals_group_order` as a stepping stone. We're really using it as an intermediate to get from group_by to summarize. 
 
-# group the same thing WITH pipes
+Turns out there's a way around this that never makes that middle variable, and it's called `pipes`! Pipes are part of `dplyr` and allow you to chain different commands together. For example: 
+~~~
+a = c(1,2,3) 
+#This 
+mean(a) 
+# is the same as this: 
+a %>% mean()
+~~~
+{: .r}
+
+Let's say you want to know the range of a: 
+~~~
+a = c(1,2,3) 
+b = range(a) # this gives you the biggest and smallest 
+c = diff(b)
+c = diff(range(a))
+
+# with pipes: 
+a %>%
+  range() %>%
+  diff()
+
+~~~
+{: .r}
+
+Let's apply this to our previous group_by, summarize, and ggplot: 
 ~~~
 mammals %>%
   group_by(order) %>%
@@ -516,20 +561,16 @@ mammals %>%
 ~~~
 {: .r}
 
-## plot outcome
-## plot outcome using filter etc. function within ggplot code (as a pipe)
-~~~
-mammals %>%
-  filter(order == 'Rodentia' | order == 'Sirenia')%>%
-  ggplot( aes(x = adult_head_body_len_mm, y = adult_body_mass_g))+geom_point(aes(color = order))+
-  scale_x_log10()+ scale_y_log10()
-~~~
-{: .r}
 
-## revisit previous concepts with pipes
+***
+Challenge: Use pipes to redo the first challenge that you did here. Reminder it's to make a scatterplot of weight vs. litter size, but only with Rodentia and Cetecea orders. color by order. Oh, and log-transform both axes while you're at it! 
+***
+
 
 
 # facet marine/terrestrial things
+
+We can use dplyr to observe our varibales in various groups. It turns out you can use ggplot to further break up your data for visualization. For example, you can look at the previous body length and body mass variables, but make two plots: one for each habitat (marine or terrestrial) automatically: 
 
 ~~~
   ggplot(mammals, aes(x = adult_head_body_len_mm, y = adult_body_mass_g))+geom_point(aes(color = order))+
@@ -540,8 +581,33 @@ mammals %>%
 ~~~
 {: .r}
 
+Wow, that was easy! Remember that in this case, it's rows vs columns. So whatever comes before the tilde is rows, whatever comes after the tilde is columns. if you don't want to facet in either direction, put a period there. 
+
+We can also do something silly, like plot it differently for each order. But it would be ridiculous to put them all in one row or one colum - facet_wrap will automatically fill up your space with a grid of ordered plots. 
+
+~~~
+  ggplot(mammals, aes(x = adult_head_body_len_mm, y = adult_body_mass_g))+geom_point(aes(color = habitat))+
+  scale_x_log10()+ scale_y_log10() + facet_wrap(~order)
+~~~
+{: .r}
+
 
 # Final section: making ggplot pretty
+
+Suppose we aren't too jazzed on the grey backgrounds and default look. ggplot makes it super easy to change those: 
+
+~~~
+  ggplot(mammals, aes(x = adult_head_body_len_mm, y = adult_body_mass_g))+geom_point(aes(color = order))+
+  scale_x_log10()+ scale_y_log10() + facet_grid(.~habitat) + 
+  theme_bw()
+  
+  ggplot(mammals, aes(x = adult_head_body_len_mm, y = adult_body_mass_g))+geom_point(aes(color = order))+
+  scale_x_log10()+ scale_y_log10() + facet_grid(.~habitat) + 
+  theme_minimal()
+~~~
+{: .r}
+
+There are quite a few defaults, which you can find listed and exampled [here](http://ggplot2.tidyverse.org/reference/ggtheme.html). However, you may want to start with one of these and then tweak things individually: like text size, font, background colors individually... the list goes on an on! Here is a [list](http://ggplot2.tidyverse.org/reference/theme.html) of all the things you can tweak. For example, 
 
 Let's make the background white, remove the major and minor lines, and adjust the text size of the axis text and axis titles, and change the background color to the facet names to "white".
 
@@ -549,8 +615,7 @@ Let's make the background white, remove the major and minor lines, and adjust th
 ggplot(mammals, aes(x = adult_head_body_len_mm, y = adult_body_mass_g))+geom_point(aes(color = order))+
   scale_x_log10()+ scale_y_log10() + facet_grid(habitat~.)+
   theme_bw()+
-  ylab("Adult body mass (g)")+
-  xlab("Adult head body length (mm)")+
+  labs(y = "Adult body mass (g)", x = "Adult head body length (mm)")+
   theme(axis.text.x = element_text(size = 12, color = "black"), 
         axis.text.y = element_text(size = 12, color = "black"), 
         axis.title.y = element_text(size = 12, color = "black"), 
@@ -563,14 +628,17 @@ ggplot(mammals, aes(x = adult_head_body_len_mm, y = adult_body_mass_g))+geom_poi
 ~~~
 {: .r}
 
-Let's add a linear model to the plots. We use the function stat_smooth(method = "lm"). Notice you can also specify your own functions using the argument "y =...."
+This is just one example of how you can tweak all of the various parameters of a theme. You can get really in the weeds with this, but often people will tweak one to their liking and apply it to all of their plots. 
+
+
+Let's add a linear fit to the plots!. We use the function stat_smooth(method = "lm"). Notice you can also specify your own functions using the argument "y =...."
 
 ~~~
-ggplot(mammals1, aes(x = adult_head_body_len_mm, y = adult_body_mass_g))+geom_point(aes(color = order))+
-  scale_x_log10()+ scale_y_log10() + facet_grid(habitat~.)+
+ggplot(mammals, aes(x = adult_head_body_len_mm, y = adult_body_mass_g))+geom_point(aes(color = order))+
+  scale_x_log10()+ scale_y_log10() + 
+  facet_grid(habitat~.)+
   theme_bw()+
-  ylab("Adult body mass (g)")+
-  xlab("Adult head body length (mm)")+
+  labs(y = "Adult body mass (g)", x = "Adult head body length (mm)")+
   theme(axis.text.x = element_text(size = 12, color = "black"), 
         axis.text.y = element_text(size = 12, color = "black"), 
         axis.title.y = element_text(size = 12, color = "black"), 
@@ -583,40 +651,17 @@ ggplot(mammals1, aes(x = adult_head_body_len_mm, y = adult_body_mass_g))+geom_po
   stat_smooth(method = "lm")
 ~~~
 {: .r}
-Let's save the plot and learn to save it in different sizes
+
+Let's save the plot and learn to save it in different sizes. If you just put a file name in, it will save to the current directory (getwd() and setwd() to view and change). Othwerisse you can put a relative or absolute path in to change that. 
 
 ~~~
 ggsave("Mass_v_length1.pdf", height = 8, width = 6)
 
 ggsave("Mass_v_length2.pdf", height = 6, width = 8)
+
+
 ~~~
 {: .r}
 
 
-* more layered geoms (stats geoms, showing multiple geoms on one plot)
 
-* then save that into a custom theme
-* set custom theme as global default theme
-
-# END OF LESSON!
-
-## Bonus material if there's extra time:
-
-## More complicated theme things; 
-
-
-* more theme details 
-* colors
-* shapes
-* color pallettes (scale_color_manual, brewer (for more complex stuff))
-* geom_errorbar
-
-* using expression stuff for symbols in axes etc.; only do if there's free time)
-* angled axis labels
-
-
- 
-## super-bonus xtra options for if there's lots of spare time @ end
-
-* ggThemeAssist
-* cowplot
