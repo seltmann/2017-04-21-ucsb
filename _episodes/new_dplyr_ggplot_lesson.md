@@ -23,8 +23,6 @@ keypoints:
 ---
 
 
-
-
 *by Umi Hoshijima, Corinne Fuchs, and Geraziella DiRenzo, based on material by Naupaka Zimmerman, Andrew Tredennick, & Kartik Ram*
 
 
@@ -67,7 +65,7 @@ library(dplyr)
 ~~~
 {: .r}
 
-Then, import the `mammals` dataset. This is a subset of a *["species-level database of extant and recently extinct mammals](http://esapubs.org/archive/ecol/E090/184/)*. You can download it [HERE](https://seltmann.github.io/2018-04-05-ucsb/data/mammal_stats.csv). 
+Then, import the `mammals` dataset. This is a subset of a *["species-level database of extant and recently extinct mammals](http://esapubs.org/archive/ecol/E090/184/)*. You can download it [HERE](https://seltmann.github.io/2018-04-05-ucsb/data/mammals.csv). 
 
 ~~~
 #loading mammals dataset for ggplot exercise:
@@ -357,13 +355,11 @@ head(arrange(tmammals_simple, desc(adult_body_mass_g)))
 ~~~
 {: .r}
 
-***
-Challenge: Make a scatterplot of weight vs. litter size, but only with Rodentia and Cetecea orders. 
+
+> **Challenge:**  Make a scatterplot of weight vs. litter size, but only with Rodentia and Cetecea orders. 
 color by order. 
+
 ***
-
-
-
 
 
 # boxplot of marine vs terrestrial body size?
@@ -576,8 +572,8 @@ mammals %>%
 {: .r}
 ![plot](https://seltmann.github.io/2018-04-05-ucsb/fig/ggplot_figs/mass_len_groued-order_scatter.png)
 
-***
-Challenge: Use pipes to redo the first challenge that you did here. Reminder it's to make a scatterplot of weight vs. litter size, but only with Rodentia and Cetecea orders. color by order. Oh, and log-transform both axes while you're at it! 
+> **Challenge:**  Use pipes to redo the first challenge that you did here. Reminder it's to make a scatterplot of weight vs. litter size, but only with Rodentia and Cetecea orders. color by order. Oh, and log-transform both axes while you're at it! 
+
 ***
 
 
@@ -685,14 +681,11 @@ ggsave("Mass_v_length1.pdf", height = 8, width = 6)
 
 ggsave("Mass_v_length2.pdf", height = 6, width = 8)
 
-
 ~~~
 {: .r}
 
-# Bonus Material: more ggplot2 fun!
+# Bonus Round: more ggplot2 and resources
 
-We've merely touched on the great things ggplot can do. We've only used the default themes and added a little of our own flair; but you can also save theme details into your own custom themes. There are also excellent packages that help you create color pallettes for you plots, and even packages that provide colorblind-friendly color sets. After this lesson, you're well-equipped to branch out on your own and see what else ggplot can do!
+We've merely touched on the great things ggplot can do. We've only used the default themes and added a little of our own flair; but you can also save theme details into your own custom themes. There are also excellent packages that help you create color pallettes for you plots, and even packages that provide colorblind-friendly color sets. Not to mention error bars, special symbols in axis labels, angled axis labels, and so many more options. If you're interested in learning more about ggplot, we'll also be teaching our first follow-up session on some of those things, plus other ggplot magic. 
 
-There are tons of excellent resources online that can help you in your furhter explorations. We've already mentioned the [official ggplot documentation](http://ggplot2.tidyverse.org/index.html). [RCookbook](http://www.cookbook-r.com/Graphs/) has an excellent section on graphics and is particularly helpful for learning how to tweak common components of a plot, like labels and legends and facets.
-
-If you're interested in learning more about ggplot, we'll also be teaching our first follow-up session on some of the other magic ggplot can make. 
+But, you're also well-equipped to do some of your own exploring after today! There are tons of excellent resources online that can help you explore. We've already mentioned the [official ggplot documentation](http://ggplot2.tidyverse.org/index.html). [RCookbook](http://www.cookbook-r.com/Graphs/) has an excellent section on graphics and is particularly helpful for learning how to tweak common components of a plot, like labels and legends and facets.
