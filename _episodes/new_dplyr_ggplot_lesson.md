@@ -649,7 +649,6 @@ ggplot(mammals, aes(x = adult_head_body_len_mm, y = adult_body_mass_g))+geom_poi
         panel.grid.minor = element_blank())
 ~~~
 {: .r}
-
 ![plot](https://seltmann.github.io/2018-04-05-ucsb/fig/ggplot_figs/pretty_plot.png)
 
 
@@ -690,5 +689,10 @@ ggsave("Mass_v_length2.pdf", height = 6, width = 8)
 ~~~
 {: .r}
 
+# Bonus Material: more ggplot2 fun!
 
+We've merely touched on the great things ggplot can do. We've only used the default themes and added a little of our own flair; but you can also save theme details into your own custom themes. There are also excellent packages that help you create color pallettes for you plots, and even packages that provide colorblind-friendly color sets. After this lesson, you're well-equipped to branch out on your own and see what else ggplot can do!
 
+There are tons of excellent resources online that can help you in your furhter explorations. We've already mentioned the [official ggplot documentation](http://ggplot2.tidyverse.org/index.html). [RCookbook](http://www.cookbook-r.com/Graphs/) has an excellent section on graphics and is particularly helpful for learning how to tweak common components of a plot, like labels and legends and facets.
+
+If you're interested in learning more about ggplot, we'll also be teaching our first follow-up session on some of the other magic ggplot can make. 
