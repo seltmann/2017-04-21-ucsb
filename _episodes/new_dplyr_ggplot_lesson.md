@@ -225,7 +225,7 @@ ggplot(data=mammals, aes(x=adult_body_mass_g, y=adult_head_body_len_mm))+
          geom_point()
 ~~~
 {: .r}
-
+![plot](https://seltmann.github.io/2018-04-05-ucsb/fig/ggplot_figs/first_plot.jpg.jpeg)
 
 
 To make this code formatted neatly, with `geom_point` on the second line, simply press enter after the `+` sign. Rstudio will automatically tab into the second line. (Hint: to correctly tab any line automatically, put your cursor on the code line and type `cmd + i` (mac) or `ctrl + i ` (windows)).  
@@ -248,19 +248,20 @@ Lets __set__ the size of the data points to make them easier to see when project
 
 ~~~
 ggplot(data=mammals, aes(x=adult_body_mass_g, y=adult_head_body_len_mm))+
-  geom_point(size=3)+
-  scale_x_log10()
+  geom_point(size=3)
 ~~~
 {: .r}
-
+![plot](https://seltmann.github.io/2018-04-05-ucsb/fig/ggplot_figs/mass_by_length_log_pt-sz.png)
+  
+  
 ...or __map__ some **useful** color onto our values. Mapping is based on your data values, usually of a yet-unplotted variable that also describes each point or observation.  In this case, taxonomic Order is a property that describes each individual mammal in our dataset, so we can map the Order on to each data point to differentiate them:
 
 ~~~
 ggplot(data=mammals, aes(x=adult_body_mass_g, y=adult_head_body_len_mm))+
-  geom_point(size=3, aes(color=order))+
-  scale_x_log10()
+  geom_point(size=3, aes(color=order))
 ~~~
 {: .r}
+![plot](https://seltmann.github.io/2018-04-05-ucsb/fig/ggplot_figs/mass_len_order-color.png)
 
 Thats a lot of orders to look at, and its hard to tell who's who.  Note however, the __automatically generated legend__.  __Yew!__  That doesn't happen in `plot` very easily, but you get it automatically in when `ggplot` maps colors or shapes to categorical variables.  
 
@@ -286,7 +287,6 @@ for (a in 1:length(orders)) {
 legend(120000000,23000, legend = orders, col = colors, cex = 0.5, pch = 16, ncol = 2)
 ~~~
 {: .r}
-
 ![plot](https://seltmann.github.io/2018-04-05-ucsb/fig/ggplot_figs/mammals_baseplot_order.jpeg)
 
 ...ew. 
@@ -377,7 +377,7 @@ We're first going to make a simple plot before making it fancy:
 ggplot(data = mammals, aes(x = habitat, y = adult_body_mass_g))+geom_boxplot()
 ~~~
 {: .r}
-
+![plot](https://seltmann.github.io/2018-04-05-ucsb/fig/ggplot_figs/mass_by_habitat_boxplot.png)
 This looks good, but clearly there are a few large numbers making this hard to visualize. Let's fix this by "log-transforming" the y axis: 
 
 
