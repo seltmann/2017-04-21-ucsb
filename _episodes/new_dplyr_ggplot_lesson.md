@@ -149,7 +149,7 @@ In `ggplot` you absolutely need the first three arguments: `data, aes, geom` to 
 
 ***
 
-###`ggplot()`
+### `ggplot()`
 
 Some people like to assign (`<-`) their plot function to a variable, like this:
 
