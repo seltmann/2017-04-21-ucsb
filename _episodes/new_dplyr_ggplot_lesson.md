@@ -70,7 +70,7 @@ Then, import the `mammals` dataset. This is a subset of a *["species-level datab
 ~~~
 #loading mammals dataset for ggplot exercise:
 setwd("~/Dropbox/SoftwareCarpenty18/")
-mammals <- read.csv("mammal_stats.csv", head=T)
+mammals <- read.csv("data/mammals.csv", head=T)
 # OR:
 mammals <- read.csv(file.choose()) # to bring up a file dialog
 ~~~

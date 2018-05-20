@@ -21,7 +21,7 @@ keypoints:
 
 **Supplementary Material**: 
 
-- [answers to exercises](https://mqwilber.github.io/2017-04-21-ucsb/sqldf-answers.txt)
+- [answers to exercises](https://seltmann.github.io/2018-04-05-ucsb/sqldf-answers.txt)
 - [reference](https://swcarpentry.github.io/sql-novice-survey/reference/)
 - [SQLite function reference](https://www.sqlite.org/lang_corefunc.html)
 
